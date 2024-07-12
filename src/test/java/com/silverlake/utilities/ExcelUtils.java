@@ -6,7 +6,9 @@ import java.io.IOException;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
+/**
+ * Generic code for excel
+ */
 public class ExcelUtils {
 
 	public static Object[][] getSheetIntoTwoDimensionalArray(String filePath, String sheetname) throws IOException {
