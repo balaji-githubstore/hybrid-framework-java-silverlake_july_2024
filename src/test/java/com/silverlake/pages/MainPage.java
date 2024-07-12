@@ -2,10 +2,14 @@ package com.silverlake.pages;
 
 import org.openqa.selenium.WebDriver;
 
-public class MainPage {
+import com.silverlake.base.WebDriverKeywords;
+
+public class MainPage extends WebDriverKeywords {
+	
 	private WebDriver driver;
 
 	public MainPage(WebDriver driver) {
+		super(driver);
 		this.driver = driver;
 	}
 
