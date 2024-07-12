@@ -3,6 +3,8 @@
 <suite name="OpenEMR Suite" parallel="tests">
 
 	<parameter name="browser" value="edge"></parameter>
+	<parameter name="node" value="http://192.168.0.85:4444"></parameter>
+	
 	<test thread-count="5" name="Login UI Test Edge">
 		<classes>
 			<class name="com.silverlake.test.LoginUITest" />
