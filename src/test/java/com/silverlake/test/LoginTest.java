@@ -5,27 +5,32 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.silverlake.base.AutomationWrapper;
+import com.silverlake.pages.LoginPage;
+import com.silverlake.pages.MainPage;
 import com.silverlake.utilities.DataSource;
 
 public class LoginTest extends AutomationWrapper {
 	
 	@Test(dataProvider = "commonDataProvider",dataProviderClass = DataSource.class)
 	public void validLoginTest(String username,String password,String expectedTitle) {
-		driver.findElement(By.id("authUser")).sendKeys(username);
-		driver.findElement(By.cssSelector("#clearPass")).sendKeys(password);
-		driver.findElement(By.cssSelector("#login-button")).click();
+		LoginPage login=new LoginPage(driver);
+		login.EnterUsername(username);
+		login.EnterPassword(password);
+		login.ClickOnLogin();
 		
-		Assert.assertEquals(driver.getTitle(), expectedTitle);
+		MainPage main=new MainPage(driver);
+		Assert.assertEquals(main.getMainPageTitle(), expectedTitle);
 	}
 	
 	@Test(dataProvider = "commonDataProvider",dataProviderClass = DataSource.class)
 	public void invalidLoginTest(String username,String password,String expectedError)
 	{
-		driver.findElement(By.id("authUser")).sendKeys(username);
-		driver.findElement(By.cssSelector("#clearPass")).sendKeys(password);
-		driver.findElement(By.cssSelector("#login-button")).click();
+		LoginPage login=new LoginPage(driver);
+		login.EnterUsername(username);
+		login.EnterPassword(password);
+		login.ClickOnLogin();
 		
-		String actualError = driver.findElement(By.xpath("//p[contains(text(),'Invalid')]")).getText();
+		String actualError = login.getInvalidErrorMessage();
 		
 		Assert.assertTrue(actualError.contains(expectedError)); //expect true 
 	}
